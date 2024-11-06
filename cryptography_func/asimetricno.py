@@ -15,7 +15,7 @@ def generate_exchange_keys()  -> tuple[Path, Path]:
     private_key : rsa.RSAPrivateKey = rsa.generate_private_key(65537, key_size=2048)
     public_key : rsa.RSAPublicKey = private_key.public_key()
     
-    write_exchange_keys_to_file(private_key, public_key)
+    return write_exchange_keys_to_file(private_key, public_key)
 
 def write_exchange_keys_to_file(private_key : rsa.RSAPrivateKey, public_key : rsa.RSAPublicKey) -> tuple[Path, Path]:
     filepath_private : Path = Path("files/privatni_kljuc.txt")
@@ -31,7 +31,7 @@ def write_exchange_keys_to_file(private_key : rsa.RSAPrivateKey, public_key : rs
         with open(filepath_private, 'wb') as file:
             file.write(private_key_bytes)
             print("wrote private to file!")
-        print(private_key_bytes)
+        # print(private_key_bytes)
         
     except Exception as e:
         print("failed to write private to file")
@@ -45,7 +45,7 @@ def write_exchange_keys_to_file(private_key : rsa.RSAPrivateKey, public_key : rs
         with open(filepath_public, 'wb') as file:
             file.write(public_key_bytes)
             print("wrote public to file!")
-        print(private_key_bytes)
+        # print(private_key_bytes)
         
     except Exception as e:
         print("failed to write public to file")
