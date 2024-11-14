@@ -4,6 +4,8 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).parent.parent)) 
 from cryptography_func import asimetricno
+from cryptography_func import simetricno
+import customtkinter
 
 def writeToInputTextFile():
     #args: file, what to write
@@ -26,13 +28,10 @@ def readFromInputTextFile():
         print("file found!")
         
         try:
-            # input_file_text['state'] = 'enabled'
-            # input_file_text.replace('1.0', 'end', filepath.read_text())
-            # input_file_text.set(filepath.read_text())
             input_file_textbox['state'] = 'normal'
             input_file_textbox.replace('1.0', 'end', filepath.read_text())
             input_file_textbox['state'] = 'disabled'
-            # input_file_text['state'] = 'disabled'
+
         except Exception as e:
             print("failed to read input from file!")
    
@@ -41,6 +40,7 @@ def readFromInputTextFile():
 
 def runAllFunctions():
     print("running all functions")
+    # asimetricno
     private_key_path, public_key_path = asimetricno.generate_exchange_keys()
     public_key_text.set(public_key_path.read_text())
     
@@ -51,7 +51,12 @@ def runAllFunctions():
     private_key_textbox['state'] = 'normal'
     private_key_textbox.replace('1.0', 'end', private_key_path.read_text())
     private_key_textbox['state'] = 'disabled'
-    private_key_text.set(private_key_path.read_text())
+    
+    # simetricno
+    secret_key_path = simetricno.generate_secret_key()
+    secret_key_textbox['state'] = 'normal'
+    secret_key_textbox.replace('1.0', 'end', secret_key_path.read_text())
+    secret_key_textbox['state'] = 'disabled'
     pass
 
 
@@ -70,6 +75,9 @@ root.rowconfigure(0, weight=1)
 
 first_frame = ttk.Frame(mainframe)
 first_frame.grid(column=0, row=0, sticky=(W, E))  # Ensure first_frame is placed properly
+
+second_frame = ttk.Frame(mainframe)
+second_frame.grid(column=1)
 
 
 content_to_write = StringVar()
@@ -93,7 +101,7 @@ ttk.Label(mainframe, text="Asimetrično: RSA")
 
 ttk.Label(mainframe, text="javni_kljuc.txt")
 public_key_text = StringVar()
-# ttk.Label(mainframe, textvariable=public_key_text)
+
 public_key_textbox = Text(
     mainframe, height=10, borderwidth=1.0,
     relief=SUNKEN,state=DISABLED, width=64, wrap="none" )
@@ -110,11 +118,20 @@ private_key_textbox = Text(
 ys = ttk.Scrollbar(mainframe, orient='vertical', command=private_key_textbox.yview)
 private_key_textbox['yscrollcommand'] = ys.set
 
+ttk.Label(mainframe, text="tajni_kljuc.txt (HEX format)",)
+secret_key_text = StringVar()
+
+
+secret_key_textbox = Text(
+    mainframe, height=1, borderwidth=1.0,
+    relief=SUNKEN,state=DISABLED, width=64, wrap="none" )
+
+ttk.Label(mainframe, text="Enkriptirani tekst asimetricno:")
 
 
 
 for child in mainframe.winfo_children(): 
-    child.grid_configure(padx=5, pady=5)
+    child.grid_configure(padx=3, pady=3)
 
 
 root.mainloop()
