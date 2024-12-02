@@ -198,107 +198,7 @@ def checkDigitalSignature():
         print("no filepaths chosen!")
         return
 
-
-
 # ------------------------------------------------------------
-
-
-class InputFileFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        
-        self.naslov = customtkinter.CTkLabel(self, text="Input file", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-
-class AsymmetricKeysFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.naslov = customtkinter.CTkLabel(self, text="Asimetricni kljucevi", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-        
-        self.private_key_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.private_key_box.grid(row=1, column=0, pady=10, padx = 5)
-        self.public_key_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.public_key_box.grid(row=1, column=1)
-        
-class SymmetricKeyFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        
-        self.naslov = customtkinter.CTkLabel(self, text="Simetrican kljuc", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-        
-        self.secret_key_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.secret_key_box.grid(row=1, column=0)
-
-
-class HashSignatureFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.naslov = customtkinter.CTkLabel(self, text="Hash", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-        
-        self.hash_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.hash_box.grid(row=1, column=0)
-
-class DigitalSignatureFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.naslov = customtkinter.CTkLabel(self, text="Potpis", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-        
-        self.digital_signature_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.digital_signature_box.grid(row=1, column=0)
-        
-
-class EncryptedSymmetricFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.naslov = customtkinter.CTkLabel(self, text="Enkriptirano simetrično", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-        
-        self.encrypted_symmetric_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.encrypted_symmetric_box.grid(row=1, column=0)
-
-class EncryptedAsymmetricFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.naslov = customtkinter.CTkLabel(self, text="Enkriptirano asimetrično", fg_color="gray30", corner_radius=5)
-        self.naslov.grid(row=0, column=0)
-        
-        self.encrypted_asymmetric_box = customtkinter.CTkTextbox(self, state='disabled')
-        self.encrypted_asymmetric_box.grid(row=1, column=0)
-
-
-class App(customtkinter.CTk):
-    def __init__(self):
-        super().__init__()
-
-        self.title("Napredni OS Projektni Zadatak")
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(0, weight=1)
-        
-        self.input_frame = InputFileFrame(self)
-        self.input_frame.grid(row=0, column=0, padx=10, pady=10)
-        
-        self.asymmetric_keys_frame = AsymmetricKeysFrame(self)
-        self.asymmetric_keys_frame.grid(row=1, column=0, padx= 10)
-
-        self.symmetric_key_frame = SymmetricKeyFrame(self)
-        self.symmetric_key_frame.grid(row=2, column=0, pady=10, padx=10)
-        
-        self.encrypted_asymmetric_frame = EncryptedAsymmetricFrame(self)
-        self.encrypted_asymmetric_frame.grid(row=1, column=1)
-        
-        self.encrypted_symmetric_frame = EncryptedSymmetricFrame(self)
-        self.encrypted_symmetric_frame.grid(row=2, column=1)
-        
-        self.hash_frame = HashSignatureFrame(self)
-        self.hash_frame.grid(row=1, column=2, padx=10)
-        
-        self.signature_frame = DigitalSignatureFrame(self)
-        self.signature_frame.grid(row=2, column=2)
-
 
 root = Tk()
 root.title("Napredni OS Projektni Zadatak")
@@ -347,8 +247,7 @@ private_key_text = StringVar()
 private_key_textbox = Text(
     first_column, height=10, borderwidth=1.0,
     relief=SUNKEN, state=DISABLED, width=64, wrap="char" )
-# ys = ttk.Scrollbar(first_column, orient='vertical', command=private_key_textbox.yview)
-# private_key_textbox['yscrollcommand'] = ys.set
+
 
 
 
@@ -435,8 +334,5 @@ for child in mainframe.winfo_children():
         child.grid_configure(padx=3, pady=3)
     for child in third_column.winfo_children():
             child.grid_configure(padx=3, pady=3)
-
-app = App()
-app.mainloop()
 
 root.mainloop()

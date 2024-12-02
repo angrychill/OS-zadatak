@@ -7,7 +7,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
-# blake2 ftw
+# koristi SHA256 jer blake2 ne podrzava neke funkcionalnosti za enkripciju
 def calculate_file_hash(file_to_hash : Path, file_to_save : Path):
     digest = hashes.Hash(hashes.SHA256())
     digest.update(file_to_hash.read_bytes())
@@ -15,7 +15,9 @@ def calculate_file_hash(file_to_hash : Path, file_to_save : Path):
     file_to_save.write_bytes(data_to_save)
     print(data_to_save)
     print("should've saved hash!")
+    
 
+# koristi hasher zbog ekstra sigurnosti kod duljine poruke
 def generate_digital_signature(file_to_sign : Path, private_key_path : Path, file_to_save_signature : Path):
    chosen_hash = hashes.SHA256()
    hasher = hashes.Hash(chosen_hash)

@@ -1,4 +1,3 @@
-# Elliptic curve
 import os
 from pathlib import Path
 from cryptography.hazmat.primitives import hashes
