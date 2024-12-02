@@ -1,3 +1,6 @@
+OS projekt od Iris Stare za NOS 2024.
+
+
 Skinite GitHub directory i runnajte main.exe
 
 
