@@ -114,7 +114,7 @@ def encryptSymmetric():
             simetricno.encrypt_symmetric(main_file, encrypted_symmetric_path, secret_key_path)
             
             symmetric_encrypted_textbox['state'] = 'normal'
-            symmetric_encrypted_textbox.replace('1.0', 'end', encrypted_symmetric_path.read_text())
+            symmetric_encrypted_textbox.replace('1.0', 'end', encrypted_symmetric_path.read_bytes())
             symmetric_encrypted_textbox['state'] = 'disabled'
     else:
         print("no filepath defined!")
@@ -260,13 +260,13 @@ private_key_textbox = Text(
 
 
 ttk.Label(first_column, text="Simetrično: AES256")
-generateSymmetricKeyButton = ttk.Button(first_column, text="Generiraj i spremi simetrični ključ", command=generateAndSaveSymmetricKey)
-loadSymmetricKeyButton = ttk.Button(first_column, text="Učitaj simetrični ključ", command=loadSymmetricKey)
+generateSymmetricKeyButton = ttk.Button(first_column, text="Generiraj i spremi tajni ključ", command=generateAndSaveSymmetricKey)
+loadSymmetricKeyButton = ttk.Button(first_column, text="Učitaj tajni ključ", command=loadSymmetricKey)
 ttk.Label(first_column, text="Tajni ključ (HEX format)",)
 secret_key_text = StringVar()
 
 secret_key_textbox = Text(
-    first_column, height=1, borderwidth=1.0,
+    first_column, height=2, borderwidth=1.0,
     relief=SUNKEN,state=DISABLED, width=64, wrap="char" )
 
 
